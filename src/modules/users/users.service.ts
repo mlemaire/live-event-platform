@@ -18,6 +18,11 @@ export class UsersService {
             email: 'john@doe.com',
             password: '$2b$10$9p68wtHpb/XU4Rk/zJi9oOASjLP0l./YzRNcEAQPmcwjyspCyYts2',
             role: 'ADMIN',
+        },{
+            id: 2,
+            email: 'jane@doe.com',
+            password: '$2b$10$9p68wtHpb/XU4Rk/zJi9oOASjLP0l./YzRNcEAQPmcwjyspCyYts2',
+            role: 'USER',
         }
     ];
 
