@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
+
+import { PrismaService } from '../../prisma/prisma.service';
 
 export type UserRole = 'USER' | 'ORGANIZER' | 'ADMIN';
 
@@ -12,25 +13,13 @@ export interface User {
 
 @Injectable()
 export class UsersService {
-    private readonly users: User[] = [
-        {
-            id: 1,
-            email: 'john@doe.com',
-            password: '$2b$10$9p68wtHpb/XU4Rk/zJi9oOASjLP0l./YzRNcEAQPmcwjyspCyYts2',
-            role: 'ADMIN',
-        },{
-            id: 2,
-            email: 'jane@doe.com',
-            password: '$2b$10$9p68wtHpb/XU4Rk/zJi9oOASjLP0l./YzRNcEAQPmcwjyspCyYts2',
-            role: 'USER',
-        }
-    ];
+    constructor(private readonly prisma: PrismaService) {}
 
-    findByEmail(email: string): User | undefined {
-        return this.users.find(user => user.email === email);
+    findByEmail(email: string) {
+        return this.prisma.user.findUnique({ where: { email } });
     }
 
     findAll() {
-    return this.users
+    return this.prisma.user.findMany();
   }
 }
